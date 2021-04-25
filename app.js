@@ -19,6 +19,7 @@ client.on("message", (message) => {
                 {
                     message.reply(`please re-send the same message, but with \`{symbol} {asset type} {when to get in} {stop loss} {any notes}\` after \`!ben startalert\`.`);
                 } else {
+                    console.log(split_message[6]);
                     const embed = new Discord.MessageEmbed()
                         .setColor("#0099ff")
                         .setTitle("New Alert!")
@@ -31,8 +32,8 @@ client.on("message", (message) => {
                             {name: "Notes", value: message.content.split(split_message[5])[1]}
                         )
                         .setFooter("The above references an opinion and is for information purposes only. It is not intended to be investment advice. Seek a duly licensed professional for investment advice.");
-                    client.channels.cache.get(process.env.channel).send("@everyone");
-                    client.channels.cache.get(process.env.channel).send(embed);
+                    //client.channels.cache.get(process.env.channel).send("@everyone");
+                    //client.channels.cache.get(process.env.channel).send(embed);
                 }
             }
         } 
