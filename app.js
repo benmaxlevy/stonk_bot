@@ -12,14 +12,13 @@ client.on("message", (message) => {
         } else if(message.member.roles.cache.some((role) => role == process.env.role))
         {
             const split_message_upper = message.content.toUpperCase().split(" ");
-            const split_message = message.content.toUpperCase().split(" ");
+            const split_message = message.content.split(" ");
             if(split_message_upper[1].includes("STARTALERT"))
             {
                 if(split_message_upper[2] == null)
                 {
                     message.reply(`please re-send the same message, but with \`{symbol} {asset type} {when to get in} {stop loss} {any notes}\` after \`!ben startalert\`.`);
                 } else {
-                    console.log(split_message[6]);
                     const embed = new Discord.MessageEmbed()
                         .setColor("#0099ff")
                         .setTitle("New Alert!")
@@ -29,11 +28,11 @@ client.on("message", (message) => {
                             {name: "Asset Type", value: split_message_upper[3]},
                             {name: "Entrance", value: split_message_upper[4]},
                             {name: "Stop Loss", value: split_message_upper[5]},
-                            {name: "Notes", value: message.content.split(split_message[5])[1]}
+                            {name: "Notes", value: message.content.substring(message.content.indexOf(split_message[6]))}
                         )
                         .setFooter("The above references an opinion and is for information purposes only. It is not intended to be investment advice. Seek a duly licensed professional for investment advice.");
-                    //client.channels.cache.get(process.env.channel).send("@everyone");
-                    //client.channels.cache.get(process.env.channel).send(embed);
+                    client.channels.cache.get(process.env.channel).send("@everyone");
+                    client.channels.cache.get(process.env.channel).send(embed);
                 }
             }
         } 
