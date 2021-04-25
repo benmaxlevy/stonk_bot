@@ -27,7 +27,7 @@ client.on("message", (message) => {
                             {name: "Asset Type", value: split_message[3]},
                             {name: "Entrance", value: split_message[4]},
                             {name: "Stop Loss", value: split_message[5]},
-                            {name: "Notes", value: message.content.slice(message.content.indexOf(split_message[6]))}
+                            {name: "Notes", value: message.content.split(split_message[5])[1]}
                         )
                         .setFooter("The above references an opinion and is for information purposes only. It is not intended to be investment advice. Seek a duly licensed professional for investment advice.");
                     client.channels.cache.get(process.env.channel).send("@everyone");
